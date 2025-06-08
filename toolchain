@@ -22,6 +22,7 @@ export SYSROOT="$TOOLCHAIN/sysroot"
 # Bindgen support for sysroot
 export BINDGEN_EXTRA_CLANG_ARGS="--sysroot=$SYSROOT -isystem $SYSROOT/usr/include -isystem $SYSROOT/usr/include/$TARGET_TRIPLE -D__ANDROID_API__=$API_LEVEL"
 
+export BUILD_SHARED_LIBS=ON
 # Optional debug echo
 echo "NDK version: $NDK_VERSION"
 echo "Using toolchain: $TOOLCHAIN"

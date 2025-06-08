@@ -158,8 +158,8 @@ fn main() {
     let build_shared_libs = std::env::var("ESPEAK_BUILD_SHARED_LIBS")
         .map(|v| v == "1")
         .unwrap_or(build_shared_libs);
-    // let profile = env::var("ESPEAK_LIB_PROFILE").unwrap_or("Release".to_string());
-    let profile = "Release";
+    let profile = env::var("ESPEAK_LIB_PROFILE").unwrap_or("Release".to_string());
+
     let static_crt = env::var("ESPEAK_STATIC_CRT")
         .map(|v| v == "1")
         .unwrap_or(false);
@@ -224,8 +224,9 @@ fn main() {
     }
 
     // ✅ Add this line to avoid permission error
-    config.define("CMAKE_INSTALL_PREFIX", &out_dir);
-
+    // config.define("CMAKE_INSTALL_PREFIX", &out_dir);
+    config.generator("Ninja");
+    config.define("CMAKE_INSTALL_PREFIX", out_dir.to_str().unwrap());
     // General
     config
         .profile(&profile)
